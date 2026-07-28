@@ -605,6 +605,7 @@
         </div>
         <ul class="nav-list">
             <li class="nav-item h1" data-target="comparisons">Comparison with Baselines</li>
+            <li class="nav-item h2" data-target="scene-text-scenarios">Scene Text Scenarios</li>
             <li class="nav-item h2" data-target="synthetic-scenarios">Synthetic Scenarios</li>
             <li class="nav-item h2" data-target="real-scenarios">Real Scenarios</li>
             <li class="nav-item h1" data-target="dataset-visualization">Dataset Visualization</li>
@@ -622,64 +623,514 @@
         </div>
     </header>
 
-    <!-- <section id="abstract">
-        <div class="container">
-            <h2>Abstract</h2>
-            <div class="abstract-content">
-                <p>
-                    Visual text editing aims to precisely modify text in images or videos while preserving stylistic consistency and visual realism.
-                    Despite significant advances in image text editing, video text editing remains largely unexplored, facing challenges in cross-frame accuracy, temporal coherence, and stylistic fidelity.
-                    In this paper, we introduce SteerVTE, a unified framework that <strong>SteerVTEs</strong> a frozen video diffusion model to perform precise video text editing through stylized glyph control.
-                    SteerVTE employs a frozen dual-branch diffusion transformer with a lightweight text context adapter that decomposes the editing signal into two orthogonal streams: a style encoder capturing the original text's visual attributes, and a dual-granularity glyph encoder encoding the target text content.
-                    To overcome the weak text rendering capability of video foundation models, we propose an OCR-guided region reweighting loss and a three-stage progressive training strategy.
-                    To support large-scale training, we also develop a fully automatic data synthesis pipeline and construct SteerVTE-1M, a dataset of one million triples spanning diverse scenes, fonts, and stylistic effects.
-                    Both quantitative and qualitative experiments show that SteerVTE achieves state-of-the-art performance, outperforming both open-source baselines and the commercial model Seedance 2.0.
-                </p>
-            </div>
-        </div>
-    </section> -->
-
-    <!-- <section id="method">
-        <div class="container">
-            <h2>Method</h2>
-            <div class="method-grid">
-                <div class="method-item">
-                    <img src="assets/method.png" alt="SteerVTE method framework">
-                </div>
-                <div class="method-item">
-                    <img src="assets/training.png" alt="SteerVTE progressive training strategy">
-                </div>
-            </div>
-            <div class="method-caption-stack">
-                <div class="method-caption-item">
-                    <div class="method-caption-title">Method Overview</div>
-                    We propose SteerVTE, a framework that SteerVTEs a video diffusion model to perform accurate video text rewriting by injecting decomposed glyph and style guidance.
-                    Given a source video, mask video, source text, and target text, we construct a reference image by cropping the first source frame using the first mask frame.
-                    A style encoder extracts source style, while a glyph encoder obtains dual-granularity glyph representations from the target text.
-                    These conditions are injected via cross-attention into a Text Control Adapter, enabling precise style-preserving text editing.
-                    We also introduce an OCR-guided region reweighting loss to enhance editing on long texts and small regions.
-                </div>
-                <div class="method-caption-item">
-                    <div class="method-caption-title">Training Strategy</div>
-                    In the first stage, the connector is primarily trained to align style and glyph features.
-                    In the second stage, the connector and DiT are jointly trained.
-                    In the third stage, the OGR loss is introduced and training proceeds on the video dataset.
-                </div>
-            </div>
-        </div>
-    </section> -->
-
     <section id="comparisons">
         <div class="container">
             <h2 style="margin-bottom: 60px;">Comparison with Baselines</h2>
             <p class="subsection-description">
-                Please scroll right to view all baselines.<br>
+                <span style="color: blue;">Please scroll right to view all baselines.</span><br>
                 Please press the play button on the top right to pause all videos for more detailed frame-by-frame comparison.<br>
                 Please refresh the page if the videos are not synchronized properly.<br>
                 <span class="zoom-tip">Tip: Click any image or video to zoom in.</span>
             </p>
 
             <div class="subsection">
+                <div class="subsection scene-text-subsection">
+                <h3 id="scene-text-scenarios">Video Text Editing in <span style="color: red; font-weight: bold;">Scene Text</span> Scenarios</h3>
+                <h4>Moving</h4>
+                <p class="subsection-description" style="margin-top: -12px;">Note: STRIVE* is our reproduced implementation of STRIVE.</p>
+                <div class="comparison-block">
+                    <div class="instruction-label">
+                        <span class="instruction-badge">Edit: <span class="instruction-src">&quot;CLEAN&quot;</span> -&gt; <span class="instruction-gt">&quot;sween&quot;</span></span>
+                    </div>
+                    <div class="scroll-window">
+                        <div class="video-card">
+                            <div class="card-header">Source Video</div>
+                            <video autoplay loop muted playsinline src="results/scene_text/moving/075/src.mp4"></video>
+                        </div>
+                        <div class="video-card is-ours">
+                            <div class="card-header">SteerVTE (Ours)</div>
+                            <video autoplay loop muted playsinline src="results/scene_text/moving/075/ours.mp4"></video>
+                        </div>
+                        <div class="video-card">
+                            <div class="card-header">STRIVE*</div>
+                            <video autoplay loop muted playsinline src="results/scene_text/moving/075/srnet.mp4"></video>
+                        </div>
+                        <div class="video-card">
+                            <div class="card-header">AnyText2</div>
+                            <video autoplay loop muted playsinline src="results/scene_text/moving/075/anytext2.mp4"></video>
+                        </div>
+                        <div class="video-card">
+                            <div class="card-header">FLUX.2</div>
+                            <video autoplay loop muted playsinline src="results/scene_text/moving/075/flux2.mp4"></video>
+                        </div>
+                        <div class="video-card">
+                            <div class="card-header">FLUX-Text</div>
+                            <video autoplay loop muted playsinline src="results/scene_text/moving/075/fluxtext.mp4"></video>
+                        </div>
+                        <div class="video-card">
+                            <div class="card-header">TextCtrl</div>
+                            <video autoplay loop muted playsinline src="results/scene_text/moving/075/textctrl.mp4"></video>
+                        </div>
+                    </div>
+                </div>
+                <div class="comparison-block">
+                    <div class="instruction-label">
+                        <span class="instruction-badge">Edit: <span class="instruction-src">&quot;CLEAN&quot;</span> -&gt; <span class="instruction-gt">&quot;veget&quot;</span></span>
+                    </div>
+                    <div class="scroll-window">
+                        <div class="video-card">
+                            <div class="card-header">Source Video</div>
+                            <video autoplay loop muted playsinline src="results/scene_text/moving/080/src.mp4"></video>
+                        </div>
+                        <div class="video-card is-ours">
+                            <div class="card-header">SteerVTE (Ours)</div>
+                            <video autoplay loop muted playsinline src="results/scene_text/moving/080/ours.mp4"></video>
+                        </div>
+                        <div class="video-card">
+                            <div class="card-header">STRIVE*</div>
+                            <video autoplay loop muted playsinline src="results/scene_text/moving/080/srnet.mp4"></video>
+                        </div>
+                        <div class="video-card">
+                            <div class="card-header">AnyText2</div>
+                            <video autoplay loop muted playsinline src="results/scene_text/moving/080/anytext2.mp4"></video>
+                        </div>
+                        <div class="video-card">
+                            <div class="card-header">FLUX.2</div>
+                            <video autoplay loop muted playsinline src="results/scene_text/moving/080/flux2.mp4"></video>
+                        </div>
+                        <div class="video-card">
+                            <div class="card-header">FLUX-Text</div>
+                            <video autoplay loop muted playsinline src="results/scene_text/moving/080/fluxtext.mp4"></video>
+                        </div>
+                        <div class="video-card">
+                            <div class="card-header">TextCtrl</div>
+                            <video autoplay loop muted playsinline src="results/scene_text/moving/080/textctrl.mp4"></video>
+                        </div>
+                    </div>
+                </div>
+                <div class="comparison-block">
+                    <div class="instruction-label">
+                        <span class="instruction-badge">Edit: <span class="instruction-src">&quot;KATHERINE&quot;</span> -&gt; <span class="instruction-gt">&quot;monetaris&quot;</span></span>
+                    </div>
+                    <div class="scroll-window">
+                        <div class="video-card">
+                            <div class="card-header">Source Video</div>
+                            <video autoplay loop muted playsinline src="results/scene_text/moving/119/src.mp4"></video>
+                        </div>
+                        <div class="video-card is-ours">
+                            <div class="card-header">SteerVTE (Ours)</div>
+                            <video autoplay loop muted playsinline src="results/scene_text/moving/119/ours.mp4"></video>
+                        </div>
+                        <div class="video-card">
+                            <div class="card-header">STRIVE*</div>
+                            <video autoplay loop muted playsinline src="results/scene_text/moving/119/srnet.mp4"></video>
+                        </div>
+                        <div class="video-card">
+                            <div class="card-header">AnyText2</div>
+                            <video autoplay loop muted playsinline src="results/scene_text/moving/119/anytext2.mp4"></video>
+                        </div>
+                        <div class="video-card">
+                            <div class="card-header">FLUX.2</div>
+                            <video autoplay loop muted playsinline src="results/scene_text/moving/119/flux2.mp4"></video>
+                        </div>
+                        <div class="video-card">
+                            <div class="card-header">FLUX-Text</div>
+                            <video autoplay loop muted playsinline src="results/scene_text/moving/119/fluxtext.mp4"></video>
+                        </div>
+                        <div class="video-card">
+                            <div class="card-header">TextCtrl</div>
+                            <video autoplay loop muted playsinline src="results/scene_text/moving/119/textctrl.mp4"></video>
+                        </div>
+                    </div>
+                </div>
+                <div class="comparison-block">
+                    <div class="instruction-label">
+                        <span class="instruction-badge">Edit: <span class="instruction-src">&quot;gm&quot;</span> -&gt; <span class="instruction-gt">&quot;Re&quot;</span></span>
+                    </div>
+                    <div class="scroll-window">
+                        <div class="video-card">
+                            <div class="card-header">Source Video</div>
+                            <video autoplay loop muted playsinline src="results/scene_text/moving/053/src.mp4"></video>
+                        </div>
+                        <div class="video-card is-ours">
+                            <div class="card-header">SteerVTE (Ours)</div>
+                            <video autoplay loop muted playsinline src="results/scene_text/moving/053/ours.mp4"></video>
+                        </div>
+                        <div class="video-card">
+                            <div class="card-header">STRIVE*</div>
+                            <video autoplay loop muted playsinline src="results/scene_text/moving/053/srnet.mp4"></video>
+                        </div>
+                        <div class="video-card">
+                            <div class="card-header">AnyText2</div>
+                            <video autoplay loop muted playsinline src="results/scene_text/moving/053/anytext2.mp4"></video>
+                        </div>
+                        <div class="video-card">
+                            <div class="card-header">FLUX.2</div>
+                            <video autoplay loop muted playsinline src="results/scene_text/moving/053/flux2.mp4"></video>
+                        </div>
+                        <div class="video-card">
+                            <div class="card-header">FLUX-Text</div>
+                            <video autoplay loop muted playsinline src="results/scene_text/moving/053/fluxtext.mp4"></video>
+                        </div>
+                        <div class="video-card">
+                            <div class="card-header">TextCtrl</div>
+                            <video autoplay loop muted playsinline src="results/scene_text/moving/053/textctrl.mp4"></video>
+                        </div>
+                    </div>
+                </div>
+                <div class="comparison-block">
+                    <div class="instruction-label">
+                        <span class="instruction-badge">Edit: <span class="instruction-src">&quot;BORTOLINI&quot;</span> -&gt; <span class="instruction-gt">&quot;LYMPH&quot;</span></span>
+                    </div>
+                    <div class="scroll-window">
+                        <div class="video-card">
+                            <div class="card-header">Source Video</div>
+                            <video autoplay loop muted playsinline src="results/scene_text/moving/067/src.mp4"></video>
+                        </div>
+                        <div class="video-card is-ours">
+                            <div class="card-header">SteerVTE (Ours)</div>
+                            <video autoplay loop muted playsinline src="results/scene_text/moving/067/ours.mp4"></video>
+                        </div>
+                        <div class="video-card">
+                            <div class="card-header">STRIVE*</div>
+                            <video autoplay loop muted playsinline src="results/scene_text/moving/067/srnet.mp4"></video>
+                        </div>
+                        <div class="video-card">
+                            <div class="card-header">AnyText2</div>
+                            <video autoplay loop muted playsinline src="results/scene_text/moving/067/anytext2.mp4"></video>
+                        </div>
+                        <div class="video-card">
+                            <div class="card-header">FLUX.2</div>
+                            <video autoplay loop muted playsinline src="results/scene_text/moving/067/flux2.mp4"></video>
+                        </div>
+                        <div class="video-card">
+                            <div class="card-header">FLUX-Text</div>
+                            <video autoplay loop muted playsinline src="results/scene_text/moving/067/fluxtext.mp4"></video>
+                        </div>
+                        <div class="video-card">
+                            <div class="card-header">TextCtrl</div>
+                            <video autoplay loop muted playsinline src="results/scene_text/moving/067/textctrl.mp4"></video>
+                        </div>
+                    </div>
+                </div>
+                <div class="comparison-block">
+                    <div class="instruction-label">
+                        <span class="instruction-badge">Edit: <span class="instruction-src">&quot;LETRAN&quot;</span> -&gt; <span class="instruction-gt">&quot;COUNTDOWN T&quot;</span></span>
+                    </div>
+                    <div class="scroll-window">
+                        <div class="video-card">
+                            <div class="card-header">Source Video</div>
+                            <video autoplay loop muted playsinline src="results/scene_text/moving/096/src.mp4"></video>
+                        </div>
+                        <div class="video-card is-ours">
+                            <div class="card-header">SteerVTE (Ours)</div>
+                            <video autoplay loop muted playsinline src="results/scene_text/moving/096/ours.mp4"></video>
+                        </div>
+                        <div class="video-card">
+                            <div class="card-header">STRIVE*</div>
+                            <video autoplay loop muted playsinline src="results/scene_text/moving/096/srnet.mp4"></video>
+                        </div>
+                        <div class="video-card">
+                            <div class="card-header">AnyText2</div>
+                            <video autoplay loop muted playsinline src="results/scene_text/moving/096/anytext2.mp4"></video>
+                        </div>
+                        <div class="video-card">
+                            <div class="card-header">FLUX.2</div>
+                            <video autoplay loop muted playsinline src="results/scene_text/moving/096/flux2.mp4"></video>
+                        </div>
+                        <div class="video-card">
+                            <div class="card-header">FLUX-Text</div>
+                            <video autoplay loop muted playsinline src="results/scene_text/moving/096/fluxtext.mp4"></video>
+                        </div>
+                        <div class="video-card">
+                            <div class="card-header">TextCtrl</div>
+                            <video autoplay loop muted playsinline src="results/scene_text/moving/096/textctrl.mp4"></video>
+                        </div>
+                    </div>
+                </div>
+                <div class="comparison-block">
+                    <div class="instruction-label">
+                        <span class="instruction-badge">Edit: <span class="instruction-src">&quot;THURLBY&quot;</span> -&gt; <span class="instruction-gt">&quot;nervier&quot;</span></span>
+                    </div>
+                    <div class="scroll-window">
+                        <div class="video-card">
+                            <div class="card-header">Source Video</div>
+                            <video autoplay loop muted playsinline src="results/scene_text/moving/120/src.mp4"></video>
+                        </div>
+                        <div class="video-card is-ours">
+                            <div class="card-header">SteerVTE (Ours)</div>
+                            <video autoplay loop muted playsinline src="results/scene_text/moving/120/ours.mp4"></video>
+                        </div>
+                        <div class="video-card">
+                            <div class="card-header">STRIVE*</div>
+                            <video autoplay loop muted playsinline src="results/scene_text/moving/120/srnet.mp4"></video>
+                        </div>
+                        <div class="video-card">
+                            <div class="card-header">AnyText2</div>
+                            <video autoplay loop muted playsinline src="results/scene_text/moving/120/anytext2.mp4"></video>
+                        </div>
+                        <div class="video-card">
+                            <div class="card-header">FLUX.2</div>
+                            <video autoplay loop muted playsinline src="results/scene_text/moving/120/flux2.mp4"></video>
+                        </div>
+                        <div class="video-card">
+                            <div class="card-header">FLUX-Text</div>
+                            <video autoplay loop muted playsinline src="results/scene_text/moving/120/fluxtext.mp4"></video>
+                        </div>
+                        <div class="video-card">
+                            <div class="card-header">TextCtrl</div>
+                            <video autoplay loop muted playsinline src="results/scene_text/moving/120/textctrl.mp4"></video>
+                        </div>
+                    </div>
+                </div>
+                <h4>Static</h4>
+                <div class="comparison-block">
+                    <div class="instruction-label">
+                        <span class="instruction-badge">Edit: <span class="instruction-src">&quot;1964&quot;</span> -&gt; <span class="instruction-gt">&quot;CERE&quot;</span></span>
+                    </div>
+                    <div class="scroll-window">
+                        <div class="video-card">
+                            <div class="card-header">Source Video</div>
+                            <video autoplay loop muted playsinline src="results/scene_text/static/182/src.mp4"></video>
+                        </div>
+                        <div class="video-card is-ours">
+                            <div class="card-header">SteerVTE (Ours)</div>
+                            <video autoplay loop muted playsinline src="results/scene_text/static/182/ours.mp4"></video>
+                        </div>
+                        <div class="video-card">
+                            <div class="card-header">STRIVE*</div>
+                            <video autoplay loop muted playsinline src="results/scene_text/static/182/srnet.mp4"></video>
+                        </div>
+                        <div class="video-card">
+                            <div class="card-header">AnyText2</div>
+                            <video autoplay loop muted playsinline src="results/scene_text/static/182/anytext2.mp4"></video>
+                        </div>
+                        <div class="video-card">
+                            <div class="card-header">FLUX.2</div>
+                            <video autoplay loop muted playsinline src="results/scene_text/static/182/flux2.mp4"></video>
+                        </div>
+                        <div class="video-card">
+                            <div class="card-header">FLUX-Text</div>
+                            <video autoplay loop muted playsinline src="results/scene_text/static/182/fluxtext.mp4"></video>
+                        </div>
+                        <div class="video-card">
+                            <div class="card-header">TextCtrl</div>
+                            <video autoplay loop muted playsinline src="results/scene_text/static/182/textctrl.mp4"></video>
+                        </div>
+                    </div>
+                </div>
+                <div class="comparison-block">
+                    <div class="instruction-label">
+                        <span class="instruction-badge">Edit: <span class="instruction-src">&quot;Acetic Ac&quot;</span> -&gt; <span class="instruction-gt">&quot;UNCLASPS&quot;</span></span>
+                    </div>
+                    <div class="scroll-window">
+                        <div class="video-card">
+                            <div class="card-header">Source Video</div>
+                            <video autoplay loop muted playsinline src="results/scene_text/static/042/src.mp4"></video>
+                        </div>
+                        <div class="video-card is-ours">
+                            <div class="card-header">SteerVTE (Ours)</div>
+                            <video autoplay loop muted playsinline src="results/scene_text/static/042/ours.mp4"></video>
+                        </div>
+                        <div class="video-card">
+                            <div class="card-header">STRIVE*</div>
+                            <video autoplay loop muted playsinline src="results/scene_text/static/042/srnet.mp4"></video>
+                        </div>
+                        <div class="video-card">
+                            <div class="card-header">AnyText2</div>
+                            <video autoplay loop muted playsinline src="results/scene_text/static/042/anytext2.mp4"></video>
+                        </div>
+                        <div class="video-card">
+                            <div class="card-header">FLUX.2</div>
+                            <video autoplay loop muted playsinline src="results/scene_text/static/042/flux2.mp4"></video>
+                        </div>
+                        <div class="video-card">
+                            <div class="card-header">FLUX-Text</div>
+                            <video autoplay loop muted playsinline src="results/scene_text/static/042/fluxtext.mp4"></video>
+                        </div>
+                        <div class="video-card">
+                            <div class="card-header">TextCtrl</div>
+                            <video autoplay loop muted playsinline src="results/scene_text/static/042/textctrl.mp4"></video>
+                        </div>
+                    </div>
+                </div>
+                <div class="comparison-block">
+                    <div class="instruction-label">
+                        <span class="instruction-badge">Edit: <span class="instruction-src">&quot;exam-oriented&quot;</span> -&gt; <span class="instruction-gt">&quot;Liverymen&quot;</span></span>
+                    </div>
+                    <div class="scroll-window">
+                        <div class="video-card">
+                            <div class="card-header">Source Video</div>
+                            <video autoplay loop muted playsinline src="results/scene_text/static/056/src.mp4"></video>
+                        </div>
+                        <div class="video-card is-ours">
+                            <div class="card-header">SteerVTE (Ours)</div>
+                            <video autoplay loop muted playsinline src="results/scene_text/static/056/ours.mp4"></video>
+                        </div>
+                        <div class="video-card">
+                            <div class="card-header">STRIVE*</div>
+                            <video autoplay loop muted playsinline src="results/scene_text/static/056/srnet.mp4"></video>
+                        </div>
+                        <div class="video-card">
+                            <div class="card-header">AnyText2</div>
+                            <video autoplay loop muted playsinline src="results/scene_text/static/056/anytext2.mp4"></video>
+                        </div>
+                        <div class="video-card">
+                            <div class="card-header">FLUX.2</div>
+                            <video autoplay loop muted playsinline src="results/scene_text/static/056/flux2.mp4"></video>
+                        </div>
+                        <div class="video-card">
+                            <div class="card-header">FLUX-Text</div>
+                            <video autoplay loop muted playsinline src="results/scene_text/static/056/fluxtext.mp4"></video>
+                        </div>
+                        <div class="video-card">
+                            <div class="card-header">TextCtrl</div>
+                            <video autoplay loop muted playsinline src="results/scene_text/static/056/textctrl.mp4"></video>
+                        </div>
+                    </div>
+                </div>
+                <div class="comparison-block">
+                    <div class="instruction-label">
+                        <span class="instruction-badge">Edit: <span class="instruction-src">&quot;London2012&quot;</span> -&gt; <span class="instruction-gt">&quot;CAPARISON&quot;</span></span>
+                    </div>
+                    <div class="scroll-window">
+                        <div class="video-card">
+                            <div class="card-header">Source Video</div>
+                            <video autoplay loop muted playsinline src="results/scene_text/static/092/src.mp4"></video>
+                        </div>
+                        <div class="video-card is-ours">
+                            <div class="card-header">SteerVTE (Ours)</div>
+                            <video autoplay loop muted playsinline src="results/scene_text/static/092/ours.mp4"></video>
+                        </div>
+                        <div class="video-card">
+                            <div class="card-header">STRIVE*</div>
+                            <video autoplay loop muted playsinline src="results/scene_text/static/092/srnet.mp4"></video>
+                        </div>
+                        <div class="video-card">
+                            <div class="card-header">AnyText2</div>
+                            <video autoplay loop muted playsinline src="results/scene_text/static/092/anytext2.mp4"></video>
+                        </div>
+                        <div class="video-card">
+                            <div class="card-header">FLUX.2</div>
+                            <video autoplay loop muted playsinline src="results/scene_text/static/092/flux2.mp4"></video>
+                        </div>
+                        <div class="video-card">
+                            <div class="card-header">FLUX-Text</div>
+                            <video autoplay loop muted playsinline src="results/scene_text/static/092/fluxtext.mp4"></video>
+                        </div>
+                        <div class="video-card">
+                            <div class="card-header">TextCtrl</div>
+                            <video autoplay loop muted playsinline src="results/scene_text/static/092/textctrl.mp4"></video>
+                        </div>
+                    </div>
+                </div>
+                <div class="comparison-block">
+                    <div class="instruction-label">
+                        <span class="instruction-badge">Edit: <span class="instruction-src">&quot;13:03&quot;</span> -&gt; <span class="instruction-gt">&quot;Conqu&quot;</span></span>
+                    </div>
+                    <div class="scroll-window">
+                        <div class="video-card">
+                            <div class="card-header">Source Video</div>
+                            <video autoplay loop muted playsinline src="results/scene_text/static/134/src.mp4"></video>
+                        </div>
+                        <div class="video-card is-ours">
+                            <div class="card-header">SteerVTE (Ours)</div>
+                            <video autoplay loop muted playsinline src="results/scene_text/static/134/ours.mp4"></video>
+                        </div>
+                        <div class="video-card">
+                            <div class="card-header">STRIVE*</div>
+                            <video autoplay loop muted playsinline src="results/scene_text/static/134/srnet.mp4"></video>
+                        </div>
+                        <div class="video-card">
+                            <div class="card-header">AnyText2</div>
+                            <video autoplay loop muted playsinline src="results/scene_text/static/134/anytext2.mp4"></video>
+                        </div>
+                        <div class="video-card">
+                            <div class="card-header">FLUX.2</div>
+                            <video autoplay loop muted playsinline src="results/scene_text/static/134/flux2.mp4"></video>
+                        </div>
+                        <div class="video-card">
+                            <div class="card-header">FLUX-Text</div>
+                            <video autoplay loop muted playsinline src="results/scene_text/static/134/fluxtext.mp4"></video>
+                        </div>
+                        <div class="video-card">
+                            <div class="card-header">TextCtrl</div>
+                            <video autoplay loop muted playsinline src="results/scene_text/static/134/textctrl.mp4"></video>
+                        </div>
+                    </div>
+                </div>
+                <div class="comparison-block">
+                    <div class="instruction-label">
+                        <span class="instruction-badge">Edit: <span class="instruction-src">&quot;UPDATES&quot;</span> -&gt; <span class="instruction-gt">&quot;Taxman&quot;</span></span>
+                    </div>
+                    <div class="scroll-window">
+                        <div class="video-card">
+                            <div class="card-header">Source Video</div>
+                            <video autoplay loop muted playsinline src="results/scene_text/static/147/src.mp4"></video>
+                        </div>
+                        <div class="video-card is-ours">
+                            <div class="card-header">SteerVTE (Ours)</div>
+                            <video autoplay loop muted playsinline src="results/scene_text/static/147/ours.mp4"></video>
+                        </div>
+                        <div class="video-card">
+                            <div class="card-header">STRIVE*</div>
+                            <video autoplay loop muted playsinline src="results/scene_text/static/147/srnet.mp4"></video>
+                        </div>
+                        <div class="video-card">
+                            <div class="card-header">AnyText2</div>
+                            <video autoplay loop muted playsinline src="results/scene_text/static/147/anytext2.mp4"></video>
+                        </div>
+                        <div class="video-card">
+                            <div class="card-header">FLUX.2</div>
+                            <video autoplay loop muted playsinline src="results/scene_text/static/147/flux2.mp4"></video>
+                        </div>
+                        <div class="video-card">
+                            <div class="card-header">FLUX-Text</div>
+                            <video autoplay loop muted playsinline src="results/scene_text/static/147/fluxtext.mp4"></video>
+                        </div>
+                        <div class="video-card">
+                            <div class="card-header">TextCtrl</div>
+                            <video autoplay loop muted playsinline src="results/scene_text/static/147/textctrl.mp4"></video>
+                        </div>
+                    </div>
+                </div>
+                <div class="comparison-block">
+                    <div class="instruction-label">
+                        <span class="instruction-badge">Edit: <span class="instruction-src">&quot;STERLING&quot;</span> -&gt; <span class="instruction-gt">&quot;Cumuli&quot;</span></span>
+                    </div>
+                    <div class="scroll-window">
+                        <div class="video-card">
+                            <div class="card-header">Source Video</div>
+                            <video autoplay loop muted playsinline src="results/scene_text/static/014/src.mp4"></video>
+                        </div>
+                        <div class="video-card is-ours">
+                            <div class="card-header">SteerVTE (Ours)</div>
+                            <video autoplay loop muted playsinline src="results/scene_text/static/014/ours.mp4"></video>
+                        </div>
+                        <div class="video-card">
+                            <div class="card-header">STRIVE*</div>
+                            <video autoplay loop muted playsinline src="results/scene_text/static/014/srnet.mp4"></video>
+                        </div>
+                        <div class="video-card">
+                            <div class="card-header">AnyText2</div>
+                            <video autoplay loop muted playsinline src="results/scene_text/static/014/anytext2.mp4"></video>
+                        </div>
+                        <div class="video-card">
+                            <div class="card-header">FLUX.2</div>
+                            <video autoplay loop muted playsinline src="results/scene_text/static/014/flux2.mp4"></video>
+                        </div>
+                        <div class="video-card">
+                            <div class="card-header">FLUX-Text</div>
+                            <video autoplay loop muted playsinline src="results/scene_text/static/014/fluxtext.mp4"></video>
+                        </div>
+                        <div class="video-card">
+                            <div class="card-header">TextCtrl</div>
+                            <video autoplay loop muted playsinline src="results/scene_text/static/014/textctrl.mp4"></video>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
                 <h3 id="synthetic-scenarios">Video Text Editing in Synthetic Scenarios</h3>
                 <h4>Common</h4>
                 <div class="comparison-block">
