@@ -384,6 +384,11 @@
         .scroll-window::-webkit-scrollbar-track { background: #f1f5f9; border-radius: 4px; }
         .scroll-window::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
 
+        .comparison-block .scroll-window {
+            flex-wrap: wrap;
+            overflow-x: visible;
+        }
+
         .video-card {
             flex: 0 0 auto; width: 220px; display: flex; flex-direction: column;
         }
@@ -625,9 +630,8 @@
 
     <section id="comparisons">
         <div class="container">
-            <h2 style="margin-bottom: 60px;">Comparison with Baselines</h2>
+            <h2 style="margin-bottom: 30px;">Comparison with Baselines</h2>
             <p class="subsection-description">
-                <span style="color: blue;">Please scroll right to view all baselines.</span><br>
                 Please press the play button on the top right to pause all videos for more detailed frame-by-frame comparison.<br>
                 Please refresh the page if the videos are not synchronized properly.<br>
                 <span class="zoom-tip">Tip: Click any image or video to zoom in.</span>
